@@ -1,0 +1,66 @@
+#!/usr/local/bin/bash
+export BASH_CONF=".extra"
+# ------------------------------------
+# Kubernetes aliases
+# ------------------------------------
+# read ops
+alias pods='kubectl get pods'
+alias svc='kubectl get svc'
+alias rc='kubectl get rc'
+alias rs='kubectl get rs'
+alias dep='kubectl get deployment'
+alias nodes='kubectl get nodes'
+alias secrets='kubectl get secret'
+alias get='kubectl get'
+alias logs='kubectl logs'
+alias desc='kubectl describe'
+
+# edit ops
+alias kedit='kubectl edit'
+alias kdel='kubectl delete'
+alias kdeldep='kubectl delete deployment'
+alias keditdep='kubectl edit deployment'
+
+# Open shell to a running pod
+kssh() { kubectl exec $1 -ti -- bash; }
+kssha() { kubectl exec $1 -ti -- /bin/ash; }
+
+# ------------------------------------
+# Docker alias and function
+# ------------------------------------
+# Get latest container ID
+alias dl="docker ps -l -q"
+# Get logs for latest container id
+alias dlogs="docker logs -f $(docker ps -l -q)"
+# Get container process
+alias dps="docker ps"
+# Get process included stop container
+alias dpa="docker ps -a"
+# Get images
+alias di="docker images"
+# Get container IP
+alias dip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
+# Run deamonized container, e.g., $dkd base /bin/echo hello
+alias dkd="docker run -d -P"
+# Run interactive container, e.g., $dki base /bin/bash
+alias dki="docker run -i -t -P"
+# Execute interactive container, e.g., $dex base /bin/bash
+alias dex="docker exec -i -t"
+# Stop all containers
+dstop() { docker stop $(docker ps -a -q); }
+# Remove all containers
+drm() { docker rm $(docker ps -a -q); }
+# Stop and Remove all containers
+alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
+# Remove all images
+dri() { docker rmi $(docker images -q); }
+# Dockerfile build, e.g., $dbu tcnksm/test
+dbu() { docker build -t=$1 .; }
+# Show all alias related docker
+dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
+# Bash into running container
+dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
+# Docker - Jenkins Blue Ocean
+alias blueocean="docker run -p 8081:8081 jenkinsci/blueocean"
+# Docker - Blazemeter/Taurus
+alias blazemeter="docker run -p 8082:8082 blazemeter/taurus"
