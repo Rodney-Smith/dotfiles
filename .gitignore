@@ -1,0 +1,44 @@
+# Compiled Python files
+*.pyc
+
+# Folder configuration files
+.DS_Store
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+# Private Information
+.private
+.gitconfig
+
+# git
+*.patch
+
+# npm
+npm-debug.log
+
+# VIM
+*.un~
+Session.vim
+.netrwhist
+*~
+*.swp
+.lvimrc
+
+# VS Code
+.vscode/
+# localhistory
+.history
+
+# Over-arching stuff
+*.ignored/
+*.ignored.*
+
+# eslint
+.eslintcache
