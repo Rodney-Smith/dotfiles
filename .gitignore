@@ -2,6 +2,7 @@
 *.pyc
 
 # Folder configuration files
+*~
 .DS_Store
 Desktop.ini
 
@@ -27,7 +28,6 @@ npm-debug.log
 *.un~
 Session.vim
 .netrwhist
-*~
 *.swp
 .lvimrc
 
