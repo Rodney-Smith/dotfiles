@@ -39,6 +39,10 @@ Session.vim
 # Over-arching stuff
 *.ignored/
 *.ignored.*
+*.tmp
+*.bak
+*.swo
+*~.nib
 # Directories
 /build/
 /deploy/
