@@ -1,7 +1,4 @@
-#!/usr/local/bin/bash
-export BASH_CONF=".aliases"
-
-# Unix Shortcuts
+#Unix Shortcuts
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -12,6 +9,10 @@ alias ack='ack-grep'
 alias diff='colordiff -u'
 alias h='history'
 alias hg='history | grep'
+alias ch='history | grep "git commit"'
+
+# Apache Tomcat:
+alias tomcat=catalina
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -20,12 +21,11 @@ else # OS X `ls`
 	colorflag="-G"
 fi
 
-# List all files colorized in long format, including dot files
-
 # Always use color output for `ls`
 alias ls="command ls ${colorflag}"
 export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
 
+# List all files colorized in long format, including dot files
 alias l='ls'
 alias la="ls -lAhF ${colorflag}"
 alias ll="ls -Alp ${colorflag}"
@@ -43,90 +43,32 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias watch='watch '
-
-# Reloads ZSH
-alias reloadz='. $HOME/.zshrc'
-
-# Editors
-alias ed="$EDITOR"
-alias ved="$VISUAL"
-alias todo='$EDITOR $HOME/.todo'
-
 # Misc. Aliases
 alias e='exit'
 
 # Pipe my public key to my clipboard.
-alias pubkey="more $HOME/.ssh/id_rsa.pub | pbcopy | echo '=> Work Public key copied to pasteboard.'"
-alias personalkey="more $HOME/.ssh/id_local.pub | pbcopy | echo '=> Home Public key copied to pasteboard.'"
-
-# Git
-alias gl='git pull --prune'
-alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
-alias gp='git push origin HEAD'
-alias gd='git diff'
-alias gc='git commit'
-alias gca='git commit -a'
-alias gco='git checkout'
-alias gcb='git copy-branch-name'
-alias gb='git branch'
-alias gs='git status -sb' # upgrade your git if -sb breaks for you. it's fun.
-alias gitt='gittower .'
-alias gitsweep='git-sweep preview'
-alias gitsweepc='git-sweep cleanup'
-
-# Capistrano
-alias capd='cap deploy'
-
-# Rubygems
-alias gi="gem install"
-alias giv="gem install -v"
-
-# Bundler
-alias b="bundle"
-alias be="bundle exec"
-alias br="bundle exec rake"
-
-# Rails
-alias migrate="rake db:migrate db:rollback && rake db:migrate"
-
-# Python\Virtualenv
-alias vcreate="virtualenv .venv --clear"
-alias vcreate3="virtualenv .venv --clear -p $(which python3)"
-alias v="source .venv/bin/activate"
-alias vd="deactivate"
-alias ck="cookiecutter"
-
-alias simplehttp="python -m SimpleHTTPServer 8000"
-
-# Xcode
-alias ios="open /Applications/Xcode.app/Contents/Applications/iOS\ Simulator.app"
-alias pi="pod install"
-alias carto="carthage outdated"
-
-# Pretty print the path
-alias path='echo $PATH | tr -s ":" "\n"'
-
-# Misc.
-alias pt='pivotal_tools'
-alias ptbug='pivotal_tools create bug'
-alias ptf='pivotal_tools create feature'
+alias pubkey="more ~/.ssh/id_local.pub | pbcopy | echo '=> rodney Public key copied to pasteboard.'"
+alias workkey="more ~/.ssh/id_work.pub | pbcopy | echo '=> SmithR4 Public key copied to pasteboard.'"
 
 # Kill all the tabs in Chrome to free up memory
 # [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
 alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 # Gracefully Quit Applications
-alias quitchrome="osascript -e 'quit app \"Chrome\"'"
-alias quitoutlook="osascript -e 'quit app \"Outlook\"'"
-alias quitsafari="osascript -e 'quit app \"Safari\"'"
+alias chromequit="osascript -e 'quit app \"Chrome\"'"
+alias outlookquit="osascript -e 'quit app \"Outlook\"'"
+alias safariquit="osascript -e 'quit app \"Safari\"'"
+
+# Pretty print the path
+alias path='echo $PATH | tr -s ":" "\n"'
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 
 # Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
 alias brewuu="brew update && brew upgrade && brew cask upgrade"
-alias brewup="brew -v update; brew -v upgrade; brew cask -v upgrade; brew cleanup; brew doctor; brew config"
-alias update_system='sudo softwareupdate -i -a; sudo npm install npm -g; sudo npm update -g; sudo gem update --system; sudo gem update'
+alias brewup="brew -v update; brew -v upgrade; brew -v cask upgrade; brew cleanup; brew doctor; brew config"
+alias update_system='sudo softwareupdate -i -a; sudo chown -R $(whoami) /usr/local/lib'
+alias update_npm='brew postinstall node; sudo npm install npm -g; sudo npm update -g; sudo gem update --system; sudo gem update'
 alias update_python_all='pip3 install --upgrade pip; pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install --user; pip3 install -U conda'
 alias update_office="cd /Library/Application\ Support/Microsoft/MAU2.0/Microsoft\ AutoUpdate.app/Contents/MacOS; ./msupdate -i; cd ~"
 alias update_all='update_system; brewup; update_python_all; update_office'
@@ -135,59 +77,32 @@ alias flushdns="sudo killall -HUP mDNSResponder"
 alias wifion="networksetup -setairportpower airport on"
 alias wifioff="networksetup -setairportpower airport off"
 
-# Change the default screenshot location to ~/Pictures/Screenshots
-alias changescloc="defaults write com.apple.screencapture location $HOME/Pictures/Screenshots && killall SystemUIServer"
-# Change the default file type for screenshots to PNG, JPG, PDF or TIFF
-alias scappng="defaults write com.apple.screencapture type PNG && killall SystemUIServer"
-alias scapjpg="defaults write com.apple.screencapture type JPG && killall SystemUIServer"
-alias scappdf="defaults write com.apple.screencapture type PDF && killall SystemUIServer"
-alias scaptiff="defaults write com.apple.screencapture type TIFF && killall SystemUIServer"
-# To change the default name for screenshots, screenshots will now be given the name followed by the date and time.
-alias changescfile='defaults write com.apple.screencapture name "sc" && killall SystemUIServer'
-
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
-
-# Hide/show all desktop icons (useful when presenting)
-alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
 # Make holding down a key repeat characters
 alias keyrepeaton="defaults write -g ApplePressAndHoldEnabled -bool FALSE"
 alias keyrepeatoff="defaults write -g ApplePressAndHoldEnabled -bool TURE"
 
-# Get rid of Dashboard
-alias dashoff="defaults write com.apple.dashboard mcx-disabled -boolean TRUE && killall Dock"
-alias dashon="defaults write com.apple.dashboard mcx-disabled -boolean FALSE && killall Dock"
-
-# The dockspace alias uses this hack to add a spacer item to the dock
-alias dockspace="defaults write com.apple.dock persistent-apps -array-add '{\"tile-type\"=\"spacer-tile\";}'; killall Dock;"
-
-# lock computer
+# Lock computer
 alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
 
 # Show filename extensions by default
 alias showext="defaults write NSGlobalDomain AppleShowAllExtensions -bool true"
 alias hideext="defaults write NSGlobalDomain AppleShowAllExtensions -bool false"
 
-# Stuff taken from @budhash source: http://xkcd.com/530/
-alias stfu="osascript -e 'set volume output muted true'"
-alias pumpitup="osascript -e 'set volume output volume 100'"
-
-# Kill all the tabs in Chrome to free up memory
-# [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
-alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
-
-# refresh shell
-alias reload='source $HOME/.bash_profile'
+# Refesh shell
+alias reload='source ~/.bash_profile'
 
 # To prep before screencasts
 alias tutMode='defaults write com.apple.dock autohide -bool true && killall Dock;
                defaults write com.apple.finder CreateDesktop -bool false && killall Finder;
                defaults write com.apple.menuextra.clock IsAnalog -bool true && killall SystemUIServer;
-               rm -rf ~/.Trash/*;'
+               rm -rf ~/.Trash/*;
+               rm -rf ~/Downloads/*'
 alias regMode='defaults write com.apple.dock autohide -bool false && killall Dock;
                defaults write com.apple.finder CreateDesktop -bool true && killall Finder;
                defaults write com.apple.menuextra.clock IsAnalog -bool false && killall SystemUIServer'
+
 alias clean='rm -rf ~/.Trash/*'
