@@ -39,6 +39,22 @@ Session.vim
 # Over-arching stuff
 *.ignored/
 *.ignored.*
+*.tmp
+*.bak
+*.swo
+*~.nib
+# Directories
+/build/
+/deploy/
+/tmp/
 
 # eslint
 .eslintcache
+
+# Log Files
+*.log
+*.stackdump
+
+# Angular Files
+angular.js.tmproj
+angular.xcodeproj
