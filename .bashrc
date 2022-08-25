@@ -1,5 +1,10 @@
 #!/usr/local/bin/bash
-export BASH_CONF="bashrc"
+#
+# .bashrc
+#
+# @author Rodney Smith
+#
+export BASH_CONF=".bashrc"
 # set JAVA Home Directory
 export JAVA_HOME="/Library/Java/Home"
 # set Apache Ant Home Directory
@@ -54,7 +59,7 @@ fi;
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{aliases,extra,path,bash_prompt}; do
+for file in ~/.{aliases,extra,path,bash_prompt,private}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;

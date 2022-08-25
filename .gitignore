@@ -33,6 +33,7 @@ Session.vim
 
 # VS Code
 .vscode/
+
 # localhistory
 .history
 

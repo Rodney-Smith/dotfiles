@@ -1,4 +1,9 @@
 #!/usr/local/bin/bash
+#
+# .extra
+#
+# @author Rodney Smith
+#
 export BASH_CONF=".extra"
 # ------------------------------------
 # Kubernetes aliases
