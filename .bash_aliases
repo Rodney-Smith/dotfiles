@@ -1,3 +1,10 @@
+#!/usr/local/bin/bash
+#
+# .bash_aliases
+#
+# @author Rodney Smith
+#
+export BASH_CONF=".bash_aliases"
 # Some more alias to avoid making mistakes:
 alias rm='rm -i'
 alias cp='cp -i'
