@@ -16,17 +16,6 @@ alias ack='ack-grep'
 alias diff='colordiff -u'
 alias h='history'
 alias hg='history | grep'
-alias ch='history | grep "git commit"'
-
-# Apache Tomcat:
-alias tomcat=catalina
-
-# Detect which `ls` flavor is in use
-if ls --color > /dev/null 2>&1; then # GNU `ls`
-	colorflag="--color"
-else # OS X `ls`
-	colorflag="-G"
-fi
 
 # Always use color output for `ls`
 alias ls="command ls ${colorflag}"

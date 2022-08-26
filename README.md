@@ -26,11 +26,18 @@ Syntax highlighted code block
 ## Header 2
 ### Header 3
 
-- Bulleted
-- List
+Expected formulas:
+- brew install docker
+- brew install kubectl
+- brew install zsh-history-substring-search
+- brew install git git-ssh git-flow git-lfs gist
 
-1. Numbered
-2. List
+If you want to figure out what default needs changing, do the following:
+1. cd ~
+2. Store current defaults in file: `defaults read > before`
+3. Make a change to your system: `sudo /Users/whoami/.osx`
+4. Store new defaults in file: `defaults read > after`
+5. Diff the files: `diff before after`
 
 **Bold** and _Italic_ and `Code` text
 

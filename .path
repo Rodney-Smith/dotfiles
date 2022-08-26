@@ -6,84 +6,91 @@
 #
 export BASH_CONF=".path"
 # Add to Environment variables.
-#export PATH="$PATH:/usr/local/opt/node@8/bin";
-#export PATH="$PATH:$ANT_HOME/bin";
-#export PATH="$PATH:$JMETER_HOME/bin";
-#export PATH="$PATH:$MYSQL_HOME/bin";
-#export PATH="$PATH:$TOMCAT_HOME/bin";
+# For binutils:
+export LDFLAGS="-L/usr/local/opt/binutils/lib"
+export CPPFLAGS="-I/usr/local/opt/binutils/include"
+# For icu4c:
+export LDFLAGS="-L/usr/local/opt/icu4c/lib";
+export CPPFLAGS="-I/usr/local/opt/icu4c/include";
+export PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig";
+# For Java:
+export JAVA_HOME="$(/usr/libexec/java_home)";
 #export JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home";
 #export JAVA_HOME="/Library/Java/Home";
-export JAVA_HOME="$(/usr/libexec/java_home)";
-export CATALINA_HOME="/usr/local/opt/tomcat/libexec";
-export CATALINA_BASE="$CATALINA_HOME/conf";
-export GEM_HOME="$HOME/.gem:$PATH";
-export M2_HOME="/usr/local/Cellar/maven/3.6.3_1/libexec";
-export MAVEN_HOME="$M2_HOME";
+export CPPFLAGS="-I/usr/local/opt/openjdk/include";
+# For JMeter:
+export JMETER_HOME='/usr/local/jmeter';
+# For libarchive:
+export LDFLAGS="-L/usr/local/opt/libarchive/lib";
+export CPPFLAGS="-I/usr/local/opt/libarchive/include";
+export PKG_CONFIG_PATH="/usr/local/opt/libarchive/lib/pkgconfig";
+# For pkg-config to find libxslt:
+export PKG_CONFIG_PATH="/usr/local/opt/libxslt/lib/pkgconfig"
+# For Maven:
+export M2_HOME="/usr/local/opt/maven/libexec";
 export M2="$M2_HOME/bin";
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH";
+export MAVEN_HOME="/usr/local/opt/maven";
 export MAVEN_OPTS="-Xms256m -Xmx512m";
+# MySQL/MariaDB
+export MYSQL_HOME="/usr/local/opt/mariadb";
+# For ncurses:
+export LDFLAGS="-L/usr/local/opt/ncurses/lib";
+export CPPFLAGS="-I/usr/local/opt/ncurses/include";
+export PKG_CONFIG_PATH="/usr/local/opt/ncurses/lib/pkgconfig";
+# For Python:
+export LDFLAGS="-L/usr/local/opt/python@3.8/lib";
+export PKG_CONFIG_PATH="/usr/local/opt/python@3.8/lib/pkgconfig";
 export PYTHONPATH="/usr/local/bin:$PYTHONPATH";
 export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python3";
 export WORKON_HOME="$HOME/.virtualenvs";
+# For Ruby:
+export RUBY_HOME="/usr/local/opt/ruby";
+export LDFLAGS="-L$RUBY_HOME/lib";
+export CPPFLAGS="-I$RUBY_HOME/include";
+export PKG_CONFIG_PATH="$RUBY_HOME/lib/pkgconfig";
+export GEM_HOME="$HOME/.gem:$PATH";
+# To link Rubies to Homebrew's OpenSSL 1.1 (which is upgraded)
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)";
+# For Apache Tomcat:
+export CATALINA_HOME="/usr/local/opt/tomcat/libexec";
+export CATALINA_BASE="$CATALINA_HOME/conf";
+export TOMCAT_HOME="/usr/local/opt/tomcat";
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH";
+
+# Custom $PATH with extra locations.
+
 # Add to the $PATH. Lower ones have higher priority.
+export PATH="/usr/local/bin:$PATH";
+export PATH="/usr/local/sbin:$PATH";
 export PATH="/usr/bin:$PATH";
 export PATH="/usr/sbin:$PATH";
 export PATH="/bin:$PATH";
 export PATH="/sbin:$PATH";
-export PATH="$HOME/bin:$PATH";
 export PATH="$GEM_HOME/bin:$PATH";
-export PATH="$HOME/Library/Python/3.9/bin:$PATH";
-export PATH="$HOME/miniconda3/bin:$PATH";
-export PATH="$HOME/anaconda/bin:$PATH";
 export PATH="$JAVA_HOME/bin:$PATH";
 export PATH="$MAVEN_HOME/bin:$PATH";
-export PATH="/usr/local/opt/openjdk/bin:$PATH";
+export PATH="/usr/local/opt/binutils/bin:$PATH";
+export PATH="/usr/local/opt/gettext/bin:$PATH";
 export PATH="/usr/local/opt/icu4c/bin:$PATH";
 export PATH="/usr/local/opt/icu4c/sbin:$PATH";
+export PATH="/usr/local/opt/openjdk/bin:$PATH";
 export PATH="/usr/local/opt/sphinx-doc/bin:$PATH";
-export PATH="/usr/local/opt/gettext/bin:$PATH";
 export PATH="/usr/local/git/bin:$PATH";
-export PATH="/usr/local/tomcat/bin:$PATH";
-export PATH="/usr/local/mysql/bin:$PATH";
-export PATH="/usr/local/maven/bin:$PATH";
-export PATH="/usr/local/jmeter/bin:$PATH";
-export PATH="/usr/local/cassandra/bin:$PATH";
-export PATH="/usr/local/ant/bin:$PATH";
+export PATH="$TOMCAT_HOME/bin:$PATH";
+export PATH="$MYSQL_HOME/bin:$PATH";
+export PATH="$JMETER_HOME/bin:$PATH";
+export PATH="$RUBY_HOME/bin:$PATH";
+export PATH="/usr/local/opt/node.js/bin:$PATH";
 export PATH="/usr/local/opt/go/libexec/bin:$PATH";
-export PATH="/usr/local/opt/libxml2/bin:$PATH";
 export PATH="/usr/local/opt/libarchive/bin:$PATH";
+export PATH="/usr/local/opt/libxml2/bin:$PATH";
+export PATH="/usr/local/opt/libxslt/bin:$PATH"
 export PATH="/usr/local/opt/ncurses/bin:$PATH";
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH";
 export PATH="/usr/local/opt/ssh-copy-id/bin:$PATH";
-export PATH="/usr/local/bin:$PATH";
-export PATH="/usr/local/sbin:$PATH";
 # Setting PATH for Python 3.10
-export PATH="$PATH:/usr/local/Cellar/python@3.10/3.10.6_1/bin";
+export PATH="$PATH:/usr/local/opt/python/bin";
 # added by Miniconda3 installer
 export PATH="$PATH:$HOME/miniconda3/bin";
+export PATH="$PATH:$HOME/anaconda/bin";
 export PATH="$PATH:$HOME/bin";
-# For compilers to find libarchive:
-export LDFLAGS="-L/usr/local/opt/libarchive/lib";
-export CPPFLAGS="-I/usr/local/opt/libarchive/include";
-# For pkg-config to find libarchive:
-export PKG_CONFIG_PATH="/usr/local/opt/libarchive/lib/pkgconfig";
-# For compilers to find ncurses:
-export LDFLAGS="-L/usr/local/opt/ncurses/lib";
-export CPPFLAGS="-I/usr/local/opt/ncurses/include";
-# For compliers to find openJDK:
-export CPPFLAGS="-I/usr/local/opt/openjdk/include";
-# For pkg-config to find ncurses:
-export PKG_CONFIG_PATH="/usr/local/opt/ncurses/lib/pkgconfig";
-# Set default editor to nano
-export EDITOR=nano
-# To link Rubies to Homebrew's OpenSSL 1.1 (which is upgraded)
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)";
-# For compilers to find icu4c:
-export LDFLAGS="-L/usr/local/opt/icu4c/lib";
-export CPPFLAGS="-I/usr/local/opt/icu4c/include";
-# For pkg-config to find icu4c:
-export PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig";
-# For compilers to find python@3.8:
-export LDFLAGS="-L/usr/local/opt/python@3.8/lib";
-# For pkg-config to find python@3.8:
-export PKG_CONFIG_PATH="/usr/local/opt/python@3.8/lib/pkgconfig";
